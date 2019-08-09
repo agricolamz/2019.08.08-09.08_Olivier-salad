@@ -1,0 +1,184 @@
+---
+title: "Recepies of the traditional Russian salad ''Olivye''"
+author: "G. Moroz"
+output:
+  html_document:
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.height=9, fig.width=12)
+```
+
+## 0. Settings
+```{r}
+library(tidyverse)
+theme_set(theme_minimal())
+```
+
+## 1. Introduction
+There is a traditional salad called "Olivye" that ... I decided to analyse what is the recipe for this salad? What is the variability in ingredients of this salad? In order to answer this question I decided to provide two connected surveys:
+
+* Parse ingredient lists from a popular website with Russian recipies <https://eda.ru>
+* Use collected ingredient list for creating an online survey
+* Analyse some survey results
+
+## 2. Parsing <https://eda.ru>
+As a first step I manually collected a list of all recipies in the Olivye category and collected them into this dataframe:
+```{r}
+eda_recipies <- read_csv("data/eda.ru.csv")
+eda_recipies
+```
+
+As you can see there are six columns in the dataset:
+
+* `link` --- a recipe's link
+* `name` --- a recipe's name
+* `portions` --- an amount of portions that recipe is made for
+* `bookmarks` --- an amount of users who bookmarked for each recipe
+* `likes` --- an amount of users who liked for each recipe
+* `comments` --- an amount of comments for each recipe
+
+Variables `bookmarks`, `like`, `comments` are highly correlated, so we will use the `bookmarks` variable, since its highest variance.
+
+```{r}
+eda_recipies %>% 
+  select(bookmarks, likes, comments) %>% 
+  cor()
+```
+
+Destribution of bookmark variables looks like Zipf law.
+
+```{r}
+eda_recipies %>% 
+  mutate(name = str_trunc(name, 30),
+         name = reorder(name, bookmarks)) %>% 
+  ggplot(aes(name, bookmarks))+
+  geom_col()+
+  coord_flip()
+```
+
+So we can use a `links` variable to parse all ingredients from each page:
+```{r, cache=TRUE, eval = TRUE}
+eda_recipies$ingredients  <- lapply(eda_recipies$link, function(link){
+source <- xml2::read_html(link)
+source %>% 
+  rvest::html_node("div.ingredients-list") %>%  
+  rvest::html_text()
+})
+
+eda_recipies$ingredients <- unlist(eda_recipies$ingredients)
+```
+
+Lets have a look on the result:
+```{r}
+head(eda_recipies$ingredients, 2)
+```
+
+So, all we need is to get rid of `\n`, spaces final chank with `twindow.ga`, initial *Ингридиенты* (ingredients) and *порции* (portions) and convert everything to a nice dataframe with two columns: `ingridient name` and `amount`. Fortunately it is possible to notice that the ingredients are separated from each other by 3 `\n` and each ingridient-amount set separated by 5 `\n`. There are also `½` and `¼` that won't be treated as numbers, so I replace them with numbers.
+```{r}
+eda_recipies %>% 
+  mutate(ingredients = str_replace_all(ingredients, "(\n\\s*){5}", "_"),
+         ingredients = str_replace_all(ingredients, "(\n\\s*){3}", "@"),
+         ingredients = str_remove(ingredients, "_\\s*window.*\n"),
+         ingredients = str_remove(ingredients, "\\s*Ингредиенты\\s*порции_")) %>%
+  tidytext::unnest_tokens(ingredient, ingredients, token = str_split, pattern = "_") %>% 
+  separate(ingredient, into = c("ingredient", "measure"), sep = "@") %>% 
+  mutate(amount = as.numeric(str_extract(measure, "\\d{1,}\\.?\\d{0,}")),
+         measure = str_remove_all(measure, "[\\d\\.]"),
+         amount = ifelse(str_detect(measure, "½"), "0.5", amount),
+         amount = ifelse(str_detect(measure, "¼"), "0.25", amount),
+         measure = str_remove_all(measure, "½ |¼ ")) -> 
+  eda_recipies
+```
+
+I created new columns `ingredient`, `amount`, `measure`:
+
+```{r}
+eda_recipies %>% 
+  select(ingredient, amount, measure)
+```
+
+## 3. Analyse data from <https://eda.ru>
+I obtained data from `r length(unique(eda_recipies$link))` recipies. I already can list all unique `r length(unique(eda_recipies$ingredient))` ingridients and use it in the second survey. But lets try to visualise first. What is the most frequent ingredient in Olivye?
+
+```{r}
+eda_recipies %>% 
+  count(ingredient, sort = TRUE) %>% 
+  mutate(ingredient = reorder(ingredient, n)) %>% 
+  filter(n > 4) %>% 
+  ggplot(aes(ingredient, n))+
+  geom_point()+
+  coord_flip()
+```
+
+On this graph we can see our first problem: there are multiple entries in a dataset of
+
+* **peas**: *консервированный зеленый горошек*, *зеленый горошек*, *замороженный зеленый горошек*, *вареный зеленый горошек*, *горох*);
+* **potatoes**: *картофель*, *отварной картофель*, *мини картофель*, *молодой картофель*;
+* **mayonnaise**: *майонез*, *легкий майонез*, *майонез «Провансаль»*;
+* **pepper**: *сладкий перец*, *красный сладкий перец* 
+* **pepper** (spice): *перец черный молотый*, *черный перец горошком*, *душистый перец горошком*, *молотый белый перец*, *свежемолотый черный перец*
+* **onion**: *лук репчатый*, *красный лук*, *лук*,	*белый лук*, *зеленый лук с луковицей*, *лук-шалот*
+* **dill**: *измельченный укроп*, *укроп*
+* **olive oil**: *оливковое масло*, *оливковое масло extra virgin*, *растительное масло*
+* **lemon**: *лимон*, *лимонный сок*
+* **parsley**: *петрушка*, *рубленая петрушка*
+* **mustard**: *горчица*, *столовая горчица*
+* **beef**: *говядина*, *вареная говядина*
+* **capers**: *каперсы*, *маринованные каперсы*
+
+So I decided normalise this part keeping different types of products (e. g. *красный лук* 'red onion', and *белый лук* 'white onion' stay different):
+
+```{r}
+eda_recipies %>% 
+  mutate(ingredient = str_replace_all(ingredient, "консервированный зеленый горошек|горох|замороженный зеленый горошек|вареный зеленый горошек", "зеленый горошек"),
+         ingredient = str_replace_all(ingredient, "отварной картофель|мини картофель|молодой картофель", "картофель"),
+         ingredient = str_replace_all(ingredient, "красный сладкий перец", "сладкий перец"),
+         ingredient = str_replace_all(ingredient, "легкий майонез|майонез «Провансаль»", "майонез"),
+         ingredient = str_replace_all(ingredient, "перец черный молотый|душистый перец горошком|свежемолотый черный перец", "черный перец"),
+         ingredient = str_replace_all(ingredient, "лук репчатый|лук|зеленый лук с луковицей", "репчатый лук"),
+         ingredient = str_replace_all(ingredient, "оливковое масло extra virgin", "оливковое масло"),
+         ingredient = str_replace_all(ingredient, "рубленая петрушка", "петрушка"),
+         ingredient = str_replace_all(ingredient, "столовая горчица", "горчица"),
+         ingredient = str_replace_all(ingredient, "вареная говядина", "говядина"),
+         ingredient = str_replace_all(ingredient, "маринованные каперсы", "каперсы"),
+         ingredient = str_remove(ingredient, "^ "),
+         measure = str_remove(measure, "^ ")) ->
+  eda_recipies
+```
+
+Now the number of unique ingredients is `r length(unique(eda_recipies$ingredient))`. They still need manual categorization. Since ingridient frequncies have changed, I redraw the frequency graph:
+
+```{r}
+eda_recipies %>% 
+  count(ingredient, sort = TRUE) %>% 
+  mutate(ingredient = reorder(ingredient, n)) %>% 
+  filter(n > 4) %>% 
+  ggplot(aes(ingredient, n))+
+  geom_point()+
+  coord_flip()
+```
+
+And here we see that the majority of Olivye salads should contain green peas, potates and carrot!
+
+Is it possible to work with the variable `amount`? All recipies are created for different number of portions, but this information is encoded in a variable `portions`. I can devide one column by another, but there still will be a problem of different measures, e. g. dill have several measures in our dataset: *г* 'gram', *пучок* 'bundle', *ветка* 'twig' and ... *по вкусу* 'as you wish'. I can sort ingredients by number of measures:
+
+```{r}
+eda_recipies %>% 
+  group_by(ingredient) %>% 
+  summarise(measure_unique = length(unique(measure))) %>% 
+  arrange(desc(measure_unique))
+```
+
+Partially it could be explained by the case of the measures (since it is not always nominative), but some times something could be measured in grams and in spoons. We will ignore this problem and continue as if everything within one ingredient is comparable. It is possible to run PCA on this data, so I ran and didn't get anything usefull from it. So for the next survey we need to threw out some rare ingredients and add created a fixed list in question form.
+
+```{r}
+eda_recipies %>% 
+  mutate(amount = ifelse(is.na(amount), 0.05, amount),
+         amount = as.numeric(amount)/portions) %>% 
+  write_csv("eda_recipies_final.csv")
+```
+
