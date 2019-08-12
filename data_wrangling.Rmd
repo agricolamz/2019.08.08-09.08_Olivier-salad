@@ -1,11 +1,16 @@
 ---
-title: "Recepies of the traditional Russian salad ''Olivye''"
+title: "Recepies of the traditional Russian Olivier salad"
 author: "G. Moroz"
 output:
   html_document:
     df_print: paged
 editor_options: 
   chunk_output_type: console
+knit: (function(inputFile, encoding) { 
+      out_dir <- 'docs';
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'index.html')) })
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +24,7 @@ theme_set(theme_minimal())
 ```
 
 ## 1. Introduction
-There is a traditional salad called "Olivye" that ... I decided to analyse what is the recipe for this salad? What is the variability in ingredients of this salad? In order to answer this question I decided to provide two connected surveys:
+There is a traditional Russian Olivier salad that ... I decided to analyse what is the recipe for this salad? What is the variability in ingredients of this salad? In order to answer this question I decided to provide two connected surveys:
 
 * Parse ingredient lists from a popular website with Russian recipies <https://eda.ru>
 * Use collected ingredient list for creating an online survey
@@ -102,7 +107,7 @@ eda_recipies %>%
 ```
 
 ## 3. Analyse data from <https://eda.ru>
-I obtained data from `r length(unique(eda_recipies$link))` recipies. I already can list all unique `r length(unique(eda_recipies$ingredient))` ingridients and use it in the second survey. But lets try to visualise first. What is the most frequent ingredient in Olivye?
+I obtained data from `r length(unique(eda_recipies$link))` recipies. I already can list all unique `r length(unique(eda_recipies$ingredient))` ingridients and use it in the second survey. But lets try to visualise first. What is the most frequent ingredient in Russian Olivier salad?
 
 ```{r}
 eda_recipies %>% 
@@ -162,7 +167,7 @@ eda_recipies %>%
   coord_flip()
 ```
 
-And here we see that the majority of Olivye salads should contain green peas, potates and carrot!
+And here we see that the majority of Russian Olivier salads should contain green peas, potates and carrot!
 
 Is it possible to work with the variable `amount`? All recipies are created for different number of portions, but this information is encoded in a variable `portions`. I can devide one column by another, but there still will be a problem of different measures, e. g. dill have several measures in our dataset: *г* 'gram', *пучок* 'bundle', *ветка* 'twig' and ... *по вкусу* 'as you wish'. I can sort ingredients by number of measures:
 
@@ -179,6 +184,9 @@ Partially it could be explained by the case of the measures (since it is not alw
 eda_recipies %>% 
   mutate(amount = ifelse(is.na(amount), 0.05, amount),
          amount = as.numeric(amount)/portions) %>% 
-  write_csv("eda_recipies_final.csv")
+  write_csv("data/eda_recipies_final.csv")
 ```
 
+## 4. Analyse results of the second survey
+
+After the first survey I've created a [Google form](https://forms.gle/D55S8Jxh6VszALmL9).
