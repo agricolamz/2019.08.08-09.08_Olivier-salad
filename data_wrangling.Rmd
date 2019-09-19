@@ -10,7 +10,7 @@ knit: (function(inputFile, encoding) {
       out_dir <- 'docs';
       rmarkdown::render(inputFile,
                         encoding=encoding, 
-                        output_file=file.path(dirname(inputFile), out_dir, 'index.html')) })
+                        output_file=file.path(dirname(inputFile), out_dir, 'data_wrangling.html')) })
 ---
 
 ```{r setup, include=FALSE}

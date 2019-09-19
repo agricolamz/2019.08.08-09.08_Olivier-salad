@@ -1,0 +1,510 @@
+---
+title: "Оливье: анализ данных"
+author: "G. Moroz"
+date: "9/16/2019"
+output: 
+  html_document:
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+knit: (function(inputFile, encoding) { 
+      out_dir <- 'docs';
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'data_analysis.html')) })
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width=12, fig.height=9)
+library(tidyverse)
+theme_set(theme_bw())
+```
+
+## Введение
+
+Эта работа по обработке данных из [опроса про салат Оливье](https://docs.google.com/forms/d/e/1FAIpQLSdowc5vhvyxUxb_hBkSu2VdW5qzJhzUeb4V1nxqdgNiPUSt5w/viewform).
+
+## Подготовка данных
+
+После того, как я переименовал вопросы, можно загрузить данные:
+
+```{r, cache=TRUE}
+df <- read_csv("data/questionary.csv")
+```
+
+Уберем дупликаты:
+
+```{r}
+df %>% 
+  select(-time, -mail) %>% 
+  distinct() ->
+  df
+df
+```
+
+Ух ты всего 51 ответ, одинаковый с каким-то другим. Убираем, вдруг это какая-то повторная отправка --- пол процента вряд ли нам что-то где-то поменяют.
+
+Вот так распределены категории:
+
+```{r, cache=TRUE}
+library(inspectdf)
+df %>% 
+  inspect_cat() %>% 
+  show_plot()
+```
+
+* воу, примерно поровну мужчин и женщин
+* в основном ответы из России
+* по всем параметрам ингридиента есть вариативность, но часто есть какой-то победитель
+
+На некоторые вопросы в анкете можно было ответить несколькими способами, и все такие ответы гуглформа записывала через запятую. В связи с этим нужно отредактировать некоторые ответы, в которых уже была запятая. Кроме того, я соединю в один столбец переменную `region`, `place` и переведу все в длинный формат (каждый ответ -- отдельная строка).
+
+```{r}
+df %>% 
+  select(-ingredients_by_user, -recipe) %>% 
+  mutate(id = 1:n(),
+         region = paste0(ru_region, be_region, uk_region, ka_region),
+         place = paste0(ru_place, be_place, uk_place, ka_place),
+         region = str_remove_all(region, "NA"),
+         place = str_remove_all(place, "NA")) %>%
+  select(-ru_region, -be_region, -uk_region, -ka_region, -ru_place, -be_place, -uk_place, -ka_place) %>% 
+  gather(question, answer, c(statements, potato:seasoning)) %>% 
+  arrange(id, question) %>% 
+  mutate(answer = str_replace(answer, "нет, не", "нет не"),
+         answer = str_remove(answer, "\\(яйца, масло, лимонный сок, соль, сахар, горчица\\)")) ->
+  df
+df
+```
+
+Сейчас ответы каждого респондента на каждый из вопросов находиться в отдельной строке, выделим теперь каждый ответ (т. е. те, которые гугл записывал через запятую) в отдельную строку.
+
+```{r}
+df %>% 
+  count(str_count(answer, ", "))
+
+df %>% 
+  separate(col = answer, sep = ", ", into = c("ans_1", "ans_2", "ans_3", "ans_4", "ans_5", "ans_6", "ans_7", "ans_8")) %>% 
+  pivot_longer(ans_1:ans_8, names_to = "answer_id", values_to = "answer") %>% 
+  filter(!is.na(answer)) %>% 
+  arrange(id, question, answer_id) %>% 
+  mutate(answer_id = as.integer(str_remove(answer_id, "ans_")),
+         answer = str_replace(answer, "нет не", "нет, не")) ->
+  df
+df
+```
+
+Так как Республика Крым появляется в списках российских (25 раз) и украинских (43 раза) регионов, то мы решили отнести этот регион к Украине:
+
+```{r}
+df %>% 
+  mutate(region = str_replace(region, "Автономная Республика Крым", "Республика Крым"),
+         country = if_else(region == "Республика Крым", "Украина", country)) ->
+  df
+```
+
+Аналогично про Севастополь (в российском списке 4 раза, в украинском списке --- 20):
+
+```{r}
+df %>% 
+  mutate(region = str_replace(region, "Город Севастополь", "Севастополь"),
+         country = if_else(region == "Севастополь", "Украина", country)) ->
+  df
+```
+
+Теперь после очистки данных (осталось `r length(unique(df$id))` респондентов), можно подойти к решению двух вопросов:
+
+* какие ингредиенты, согласно ответом наших респондентов, чаще всего входят в Оливье
+* есть ли какие-то региональные, возрастные, гендерные паттерны (или их кобинации)
+
+## Типичный Оливье
+
+```{r}
+df %>% 
+  count(question, answer) %>% 
+  arrange(question, desc(n)) %>% 
+  group_by(question) %>% 
+  mutate(id = 1:n()) %>% 
+  filter(id == 1)
+```
+
+Как видим, самые частые ответы:
+
+* яблоки не нужны
+* вареная моковь
+* соленые огурцы
+* вареные куриные яйца
+* не нужно зелени
+* из мяса -- колбаса
+* лук не нужен
+* кортошка -- любая
+* майонез
+* соль
+* «Оливье» готовили в семье моих родителей
+
+## Паттерны
+
+### Картофель
+```{r}
+df %>% 
+  filter(question == "potato") %>% 
+  count(answer, country, age, gender) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  facet_grid(country~gender, scales = "free_y")
+
+trashold <- 10
+```
+
+Данных достаточно много, так как достаточно много категорий. Однако насколько мы можем верить этим неблюдениям? Есть случаи, когда из региона у нас всего 5 ответов, а есть регионы, где ответов очень много. Мы введем некоторый порог в `r trashold` наблюдений.
+
+```{r}
+df %>% 
+  filter(question == "potato") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+По оси x -- возраст, по оси y -- количество ответов, цветом обозначен тип ответа. Видно, что соревнуются ответы "белый картофель" и "все равно какой", а где-то внизу "молодой картофель". Но мне кажется разница между этими ответами не так значима: не то чтобы получилось, что, например, много людей считает, что не нужно класть картофель. Также мы видим, что тенденцию по возрасту можно наблюдать лишь на данных из России, так как люди из других стран все же малопредсатвлены. Еще видно, что люди, ответившие в графе пол "другое", к сожалению, тоже не выдерживают нашего порога.
+
+### Морковь
+
+```{r}
+df %>% 
+  filter(question == "carrot") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+Вот здесь уже интересно: большинство людей считает, что нужно класть "вареную морковь", а на втором месте стоит ответ "нет, не нужно". Мы видим, что разрыв между разными вариантами ответов (синими и красными точками) во всех случаях, когда достаточно данных, сохраняется. При этом доли ответа "вареная морковка" достаточно высоки во всех странах кроме Украины, где она побеждает ответ "нет, не нужно", но с заметно меньшим перевесом. В Казахстане и Белоруссии еще меньше данных, но, тенденция обратная -- вариант "вареная морковь" встречается значительно чаще других. Возраст, в отличие от предыдущего графика играет роль: лишь люди от 15 до 35 считают, что можно не класть в салат морковь, в остальных случаях можно было бы предположить, что нам просто не хватает данных, однако все же у нас достаточно много наблюдений от людей старше 35, и тот факт, что среди них все предпочитают класть вареную морковку.
+
+Может быть что-то увидиться на карте регионов?
+
+```{r, cache=TRUE}
+final_df <- read_csv("data/final_df.csv.gz")
+olivier_plot <- function(question, answers, baseline = "", thrashold = 0, title, user_df = df, map_df = final_df){
+user_df %>% 
+  filter(question == {{ question }},
+         str_detect(answer, {{ answers }}),
+         str_detect(country, "Россия|Украина|Белоруссия|Казахстан")) %>% 
+  count(country, region, answer) %>% 
+  group_by(region) %>% 
+  mutate(total = sum(n),
+         ratio = n/total) %>%
+  filter(answer == baseline, total >= thrashold) %>% 
+  full_join(map_df) %>% 
+  mutate(long = ifelse(long < 0, long + 360, long)) ->
+  for_plot
+  
+for_plot %>% 
+  select(-lat, -long, -group) %>% 
+  filter(str_detect(region, "Нур-Султан|Москва|Санкт-Петербург|Киев$|Минск$")) %>% 
+  distinct() %>% 
+  as.data.frame() %>% 
+  cbind(data.frame(group = 1:5,
+         long = c(20, # Минск
+                  100, # Нур-Султан
+                  20, # Москва
+                  20, # Санкт-Петербург
+                  20), # Киев
+         lat = c(58, # Минск
+                 45, # Нур-Султан
+                 62, # Москва
+                 75, # Санкт-Петербург
+                 45) # Киев
+)) ->
+  subplot
+
+data.frame(region = rep(c("Минск", "Нур-Султан", "Москва", "Санкт-Петербург", "Киев"), 2),
+       country = rep(subplot$country, 2),
+       lat = c(53.91667,51.13333, 55.75583, 59.95000, 50.45000, subplot$lat),
+       long = c(27.55000,71.43333, 37.61778, 30.31667, 30.51667, subplot$long),
+       group = rep(1:5, 2),
+       ratio = 1) ->
+  lines
+
+for_plot %>% 
+  ggplot(aes(long, lat, group = group, fill = ratio)) +
+  geom_polygon(aes(color = country), size = 0.4, show.legend = FALSE) +
+  coord_map(projection = 'gilbert', orientation = c(90, 0, 50))+
+  theme_bw()+
+  scale_color_manual(values = c("royalblue", "darkorchid4", "darkolivegreen4", "black"))+
+  scale_fill_gradient(low = "white", high = "darkgoldenrod1")+
+  labs(title = title,
+       subtitle = "проекция Гилберта, с центром в 50 меридиане", 
+       caption = "Г. А. Мороз, 2019. Создано при помощи пакета ggplot2.",
+       x = "", y = "") +
+  geom_line(data = lines, aes(long, lat, group = region), color = "black", linetype = 2, alpha = 0.4, size = 0.5)+
+  theme(legend.position = c(1, 1), 
+        legend.justification = c(1.1, 1.1), 
+        legend.title = element_blank(),
+        plot.caption = element_text(color = rgb(1,250/255,250/255), size = 12),
+        panel.background = element_rect(fill = "lightcyan1"),
+        panel.grid.major = element_line(size = 0.1, linetype = 'solid',
+                                colour = "black"))+
+  # fake layer for creating a legend
+  geom_label(data = subplot, aes(long, lat, fill = ratio, label = region))+
+  geom_label(data = subplot, aes(long, lat, color = country, fill = ratio, label = region), show.legend = FALSE)
+}
+olivier_plot(question = "carrot", 
+             answers = "вареную морковь|нет, не нужно",
+             baseline = "вареную морковь",
+             title = "Доля ответов 'варёная морковь' vs. 'нет, не нужно'",
+             thrashold = 0)
+```
+
+В целом каких-то региональных паттернов не видно. Правда в Украине видны белые пятна в Луганской и Донецкой областях, да и в целом эти и соседние регионы сильно противопоставлены западной Украине, где доли достаточно высокие:
+
+```{r}
+df %>% 
+  filter(question == "carrot",
+         str_detect(answer, "вареную морковь|нет, не нужно"),
+         str_detect(country, "Россия|Украина|Белоруссия|Казахстан")) %>% 
+  count(country, region, answer) %>% 
+  group_by(region) %>% 
+  mutate(total = sum(n),
+         ratio = n/total) %>%
+  filter(answer == "вареную морковь") %>% 
+  arrange(ratio)
+```
+
+```{r, cache=TRUE}
+df %>% 
+  filter(question == "carrot",
+         str_detect(answer, "вареную морковь|нет, не нужно"),
+         str_detect(country, "Украина")) %>% 
+  count(country, region, answer) %>% 
+  group_by(region) %>% 
+  mutate(total = sum(n),
+         ratio = n/total) %>%
+  filter(answer == "вареную морковь") %>% 
+  full_join(final_df) %>% 
+  mutate(long = ifelse(long < 0, long + 360, long)) %>% 
+  filter(country == "Украина") %>% 
+  ggplot(aes(long, lat, group = group, fill = ratio)) +
+  geom_polygon(size = 0.4, color = "black") +
+  coord_map(projection = 'gilbert', orientation = c(90, 0, 32))+
+  theme_bw()+
+  scale_color_manual(values = c("royalblue", "darkorchid4", "darkolivegreen4", "black"))+
+  scale_fill_gradient(low = "white", high = "darkgoldenrod1")+
+  labs(title = "Доля ответов 'варёная морковь' vs. 'нет, не нужно'",
+       subtitle = "проекция Гилберта, с центром в 32 меридиане", 
+       caption = "Г. А. Мороз, 2019. Создано при помощи пакета ggplot2.",
+       x = "", y = "")+
+  theme(legend.position = c(1, 1), 
+        legend.justification = c(1.1, 1.1), 
+        legend.title = element_blank(),
+        plot.caption = element_text(color = rgb(1,250/255,250/255), size = 12),
+        panel.background = element_rect(fill = "lightcyan1"),
+        panel.grid.major = element_line(size = 0.1, linetype = 'solid',
+                                colour = "black"))
+
+```
+
+На данной карте не хватает Ужгородской области, а так все идет полосами: Луцкая, Львовская, Ивано-Франковская, Тернопольская, Ровненская, Черновецкая и Хмелницкая с высоким процентом, Житомирская, Винница и Одесская с низким процентом, Киевская, Черкасская, Кировоградская и Николаевская с высоким процентом, и все остальные регионы -- с низким.
+
+### Яйца
+
+На уровне этой переменной не наблюдается вариативности. Вот так вот выглядят данные обрезанные порогом 10:
+
+```{r}
+df %>% 
+  filter(question == "egg") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+### Огурцы
+
+```{r}
+df %>% 
+  filter(question == "cucumber") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Видимо, можно отбросить ответы "нет, не нужно", и "все равно какие". Попробуем свести дихотомию до двух членов: свежие vs не свежие.
+
+```{r, cache=TRUE}
+df %>% 
+  mutate(answer = str_replace(answer, "маринованные корнишоны|маринованные огурцы|соленые огурцы", "маринованные/соленные огурцы")) ->
+  df
+
+olivier_plot(question = "cucumber", 
+             answers = "маринованные/соленные огурцы|обычные свежие огурцы",
+             baseline = "маринованные/соленные огурцы",
+             title = "Доля ответов 'обычные свежие огурцы' vs. остальные",
+             thrashold = 0)
+```
+
+Видно, что значительная часть европейскаой части России, Кавказ и Белорусь значительно светлее чем Украин, Казахстан и Урал и дальний восток России. Украина опять распадается на западную (более темную) и восточную (более светлую).
+
+### Лук
+```{r}
+df %>% 
+  filter(question == "onion") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+На графике мы видим, что большинство людей считает, что лук не нужен, но есть значительная доля людей, которая в Оливье лук кладет:
+
+```{r, cache=TRUE}
+df %>% 
+  mutate(answer = ifelse(question == "onion" & answer != "нет, не нужно", "лук", answer)) ->
+  df
+  
+olivier_plot(question = "onion", 
+             answers = "нет, не нужно|лук",
+             baseline = "нет, не нужно",
+             title = "Доля ответов 'не нужен лук' vs. 'нужен лук'",
+             thrashold = 0)
+```
+
+Что касается лука, здесь не видно никаких региональных параметров, кроме Украины, в которой встречаются регионы, где чаще всего кладут лук в Оливье (белые области).
+
+### Горошек
+```{r}
+df %>% 
+  filter(question == "peas") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold-1) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Свежий горошек или консервированный/маринованный?
+
+```{r, cache=TRUE}
+olivier_plot(question = "peas", 
+             answers = "маринованный горошек|свежий зеленый горошек",
+             baseline = "маринованный горошек",
+             title = "Доля ответов 'маринованный/консервированный горошек' vs. 'свежий горошек'",
+             thrashold = 0)
+```
+
+Опять выделяется Украина: если ответов по всем остальным регионам в целом отвечают двумя способами, то на Украине наиболее высокие значения, т. е. в Украине используют лишь маринованный/консервированный горошек.
+
+### Яблоки
+
+На уровне этой переменной не наблюдается вариативности. Вот так вот выглядят данные обрезанные порогом 10:
+
+```{r}
+df %>% 
+  filter(question == "apple") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+### Зелень
+```{r}
+df %>% 
+  filter(question == "greens") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Здесь видны два паттерна: люди с зеленью и остальные. Объединим в одну группу ответы, содержащие петрушку и зелень, и противопоставим им ответы без зелени:
+
+```{r,  cache=TRUE}
+df %>% 
+  filter(!str_detect(answer, "чеснок|стручковый лук")) %>% 
+  mutate(answer = ifelse(str_detect(answer, "петрушка|укроп"), "зелень",answer)) -> 
+  df
+
+olivier_plot(question = "greens", 
+             answers = "зелень|нет, не нужно",
+             baseline = "зелень",
+             title = "Доля ответов 'зелень' vs. 'без зелени'",
+             thrashold = 0)
+```
+
+На этой карте видно, что, видимо зелень принято класть в Оливье в России и Казахстане -- именно Белорусь и Украина обладают самыми светлыми значениями, т. е. совсем не кладут зелень. Странным образом, достаточно нетипичное значение имеет Нур-Султан, достаточно сильно выделяясь на фоне остального Казахстана.
+
+### Оливки маслины...
+На уровне этой переменной не наблюдается вариативности. Вот так вот выглядят данные обрезанные порогом 10:
+
+```{r}
+df %>% 
+  filter(question == "specials") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+### Мясо
+```{r}
+df %>% 
+  filter(question == "meat_fish") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Не знаю, что делать... Вроде колбаса всех побеждает, но есть много любителей положить что-нибудь другое.
+
+### Приправы
+```{r}
+df %>% 
+  filter(question == "spice") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Необычный случай, ответы здесь совсем невзаимоисключающие, так что этот параметр я бы выкинул.
+
+### Заправка
+На уровне этой переменной почти не наблюдается вариативности. Вот так вот выглядят данные обрезанные порогом 10:
+
+```{r}
+df %>% 
+  filter(question == "seasoning") %>% 
+  count(answer, country, age, gender) %>% 
+  filter(n >= trashold) %>% 
+  ggplot(aes(age, n, color = answer))+
+  geom_point()+
+  geom_smooth(se = FALSE)+
+  facet_grid(country~gender, scales = "free_y")
+```
+
+Вроде майонез всех побеждает, но есть какое-то количестов любителей положить что-нибудь другое.
+
+## Всякие другие параметры
+Вроде все паттерны одинаковы у мужчин и женщин, иерархия частотности ответов в большинстве случаев совпадает для любого возраста, для всех ингредиентов (т. е. нет перекрещивающихся линий на графиках с возрастом и полом).
