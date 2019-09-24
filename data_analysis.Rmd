@@ -281,7 +281,10 @@ df %>%
          sausage = ifelse(str_detect(meat_fish, "колбаса"), "1", "0"),
          chicken = ifelse(str_detect(meat_fish, "курица"), "1", "0"),
          no_meat = ifelse(str_detect(meat_fish, "нет, не надо класть"), "1", "0"),
-         other_flesh = ifelse(str_detect(meat_fish, "(икра)|(лосось)|(маринованные грибы)|(свинина)|(сервелат)|(сосиски)|(язык (говяжий или свиной))"), "1", "0")) %>% 
+         other_flesh = ifelse(str_detect(meat_fish, "(икра)|(лосось)|(маринованные грибы)|(свинина)|(сервелат)|(сосиски)|(язык (говяжий или свиной))"), "1", "0")) ->
+  ingridients
+
+ingridients %>% 
   select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
   mutate_all(as.integer) %>% 
   group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
@@ -289,24 +292,270 @@ df %>%
   filter(n >= 50) %>% 
   select(-n) %>% 
   as.data.frame()->
-  ingredients
+  ingredients_transformed
 
-colnames(ingredients) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
 
-library(UpSetR)
-upset(ingredients, keep.order = TRUE,
-      nsets = 16, 
-      text.scale = 1.5,
-      nintersects = 100, 
-      order.by = "freq", 
-      mainbar.y.label = "количество ответивших\n\n\n\n\n",
-      sets.x.label = "количество упоминаний", 
-      mb.ratio = c(0.6, 0.4))->
-  my_plot
-plot(gridExtra::arrangeGrob(my_plot$Main_bar, my_plot$Matrix, nrow = 2))
+olivier_recipe_plot <- function(input_df, 
+                                freq_max = 100, 
+                                title = NULL, 
+                                nudge = 2,
+                                pad = "\n\n\n\n\n"){
+
+# input_df <- ingredients_transformed
+input_df %>% 
+  group_by_all() %>% 
+  count() %>% 
+  ungroup() %>% 
+  arrange(desc(n)) %>% 
+  filter(n > {{freq_max}}) %>% 
+  mutate(id = 1:n()) ->
+  input_df_filtered
+  
+input_df_filtered %>% 
+  select(-n, -id) %>% 
+  colSums() %>% 
+  sort(decreasing = TRUE) %>% 
+  names() ->
+  levels
+
+input_df_filtered %>% 
+  pivot_longer(-c(id, n), names_to = "variable", values_to = "value") %>% 
+  mutate(variable = factor(variable, levels = levels)) %>% 
+  ggplot(aes(id, variable, color = as.factor(value)))+
+  geom_point(show.legend = FALSE)+
+  scale_color_manual(values = c("grey90", "black"))+
+  labs(x = "",  y = "", caption = "Г. А. Мороз, 2019. Создано при помощи пакета ggplot2.")+
+  xlim(0.5, nrow(input_df_filtered)+0.5)+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) ->
+  p1
+
+input_df_filtered %>% 
+  ggplot(aes(id, n, label = n))+
+  geom_col()+
+  geom_text(nudge_y = nudge)+
+  labs(x = "", y = pad,
+       title = title)+
+  xlim(0.5, nrow(input_df_filtered)+0.5)+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())->
+  p2
+
+plot(gridExtra::arrangeGrob(p2, p1, nrow = 2))
+}
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 50, nudge = 20)
 ```
 
 Из 796 уникальных рецептов, которые были собраны, мы выбрали те, что встречались больше 50 раз. Каждый столбец --- это уникальный рецепт. Столбик сверху сообщает сколько раз встретился такой рецепт. Жирная точка обозначает, что данный ингридиент входит в данный рецепт.
+
+Можно посмотреть на типичные рецепты по странам. Россия:
+
+###  По странам {.tabset .tabset-fade .tabset-pills}
+
+#### Россия
+```{r}
+ingridients %>% 
+  filter(country == "Россия") %>% 
+  select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate_all(as.integer) %>% 
+  group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate(n = n()) %>% 
+  filter(n > 40) %>% 
+  select(-n) %>% 
+  as.data.frame()->
+  ingredients_transformed
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 50, title = "Россия")
+```
+
+#### Украина
+```{r}
+ingridients %>% 
+  filter(country == "Украина") %>% 
+  select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate_all(as.integer) %>% 
+  group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate(n = n()) %>% 
+  filter(n >= 5) %>% 
+  select(-n) %>% 
+  as.data.frame()->
+  ingredients_transformed
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 5, title = "Украина")
+```
+
+#### Белоруссия
+```{r}
+ingridients %>% 
+  filter(country == "Белоруссия") %>% 
+  select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate_all(as.integer) %>% 
+  group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate(n = n()) %>% 
+  filter(n >= 4) %>% 
+  select(-n) %>% 
+  as.data.frame()->
+  ingredients_transformed
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 4, title = "Белоруссия")
+
+```
+
+#### Казахстан
+
+```{r}
+ingridients %>% 
+  filter(country == "Казахстан") %>% 
+  select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate_all(as.integer) %>% 
+  group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  mutate(n = n()) %>% 
+  filter(n >= 4) %>% 
+  select(-n) %>% 
+  as.data.frame()->
+  ingredients_transformed
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 4, title = "Казахстан")
+```
+
+```{r}
+ingridients %>% 
+  select(country, carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  group_by(country, carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  summarise(n = n()) %>% 
+  group_by(country) %>% 
+  mutate(max = max(n)) %>% 
+  filter(n == max) %>% 
+  arrange(desc(n)) %>% 
+  select(country, n)
+```
+
+В разных страннах мы нашли разное количество разных рецептов (в данном случае рецепт -- набор ингредиентов): в России -- 288, в Украине -- 27, в Белоруссии -- 25, в Казахстане -- 11. Самые популярные рецепты в этих странах содержат:
+
+- марковку, 
+- мариновонные/консервированные огурцы
+- яйцо
+- не содержало зелени
+- колбасу
+- лук (кроме Белоруссии)
+- консервированный горошек
+- картошка
+- майонез
+
+###  По регионам {.tabset .tabset-fade .tabset-pills}
+
+Мы выбрали регионы, где ответов больше 10:
+
+```{r, include=FALSE}
+file.remove("olivier_recipe_plot_by_region.Rmd")
+file.create("olivier_recipe_plot_by_region.Rmd")
+
+ingridients %>% 
+  count(country, region) %>% 
+  filter(region != "",
+         n > 10) %>% 
+  arrange(country, n) ->
+  for_rmd
+
+lapply(seq_along(for_rmd$region), function(i){
+text <- c(paste0("#### ", 
+         substr(for_rmd$country[i], 1, 2), 
+         ":", 
+         for_rmd$region[i],  
+         "\n\n"),
+         "```{r}",
+         "ingridients %>%",
+         paste0("filter(region == '", for_rmd$region[i], "') %>%"),
+         "select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% ",
+         "mutate_all(as.integer) %>% ",
+         "group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% ",
+         "mutate(n = n()) %>% ",
+         "filter(n >= 1) %>% ",
+         "select(-n) %>% ",
+         "as.data.frame()-> ",
+         "ingredients_transformed\n\n",
+         'colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")\n\n',
+         paste0('olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "', for_rmd$region[i],'")\n'),
+         "```\n\n")
+  write_lines(text, path = "olivier_recipe_plot_by_region.Rmd",
+              append = TRUE)
+})  
+```
+
+
+```{r, child = "olivier_recipe_plot_by_region.Rmd"}
+```
+
+### Обобщение по регионам
+
+Мы отфильтровали наиболее популярные рецепты в каждой из областей и оставили только те рецепты, которые дали более 5 человек из данной области: 
+```{r, fig.height=12}
+ingridients %>% 
+  group_by(country, region, carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+  summarise(n = n()) %>% 
+  group_by(country, region) %>% 
+  mutate(max = max(n)) %>% 
+  filter(region != "",
+         n == max,
+         n >= 5) %>% 
+  select(-max) %>% 
+  group_by(country, region, n) %>% 
+  mutate(id = 1:n(),
+         id = ifelse(id == 1, "", id)) %>% 
+  mutate(x = paste(str_sub(country, 1, 2), region, id)) %>% 
+  select(-id) %>% 
+  ungroup() %>% 
+  arrange(x, n) ->
+  max_ingridients
+
+colnames(max_ingridients) <- c("country", "region",  "морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез", "n", "x")
+
+max_ingridients %>% 
+  select(-country, -region, -n, -x) %>% 
+  mutate_all(as.integer) %>% 
+  colSums() %>% 
+  sort(decreasing = TRUE) %>% 
+  names() ->
+  levels
+
+max_ingridients %>% 
+  pivot_longer(-c(country, region, n, x), names_to = "variable", values_to = "value") %>% 
+  mutate(variable = factor(variable, levels = levels)) %>% 
+  ggplot(aes(x, variable, color = as.factor(value)))+
+  geom_point(show.legend = FALSE)+
+  scale_color_manual(values = c("grey90", "black"))+
+  labs(x = "",  y = "", caption = "Г. А. Мороз, 2019. Создано при помощи пакета ggplot2.")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) ->
+  p1
+
+max_ingridients %>% 
+  select(x, n) %>% 
+  ggplot(aes(x, n, label = n))+
+  geom_col()+
+  geom_text(nudge_y = 1) + 
+  labs(x = "", y = "\n\n\n\n\n",
+       title = "Самые частые рецепты для каждого региона")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())->
+  p2
+plot(gridExtra::arrangeGrob(p2, p1, nrow = 2))
+```
+
+Видимо, основное ядро оливье во всех областях составляют: яйца, консервированный горошек, майонез, мар./сол. огурцы и морковка, а основная вариативность приходиться на колбасу vs. курицу vs. ветчину, на то, класть ли лук, и на то, класть ли зелень.
+
 
 ## Паттерны
 ### Картофель

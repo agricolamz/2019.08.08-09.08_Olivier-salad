@@ -1,0 +1,2256 @@
+#### Бе:Могилёвская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Могилёвская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Могилёвская область")
+
+```
+
+
+#### Бе:Минская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Минская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Минская область")
+
+```
+
+
+#### Бе:Витебская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Витебская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Витебская область")
+
+```
+
+
+#### Бе:Гродненская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Гродненская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Гродненская область")
+
+```
+
+
+#### Бе:Гомельская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Гомельская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Гомельская область")
+
+```
+
+
+#### Бе:Брестская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Брестская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Брестская область")
+
+```
+
+
+#### Бе:Минск
+
+
+```{r}
+ingridients %>%
+filter(region == 'Минск') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Минск")
+
+```
+
+
+#### Ка:Восточно-Казахстанская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Восточно-Казахстанская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Восточно-Казахстанская область")
+
+```
+
+
+#### Ка:Костанайская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Костанайская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Костанайская область")
+
+```
+
+
+#### Ка:Павлодарская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Павлодарская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Павлодарская область")
+
+```
+
+
+#### Ка:Карагандинская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Карагандинская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Карагандинская область")
+
+```
+
+
+#### Ка:Алма-Ата
+
+
+```{r}
+ingridients %>%
+filter(region == 'Алма-Ата') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Алма-Ата")
+
+```
+
+
+#### Ро:Кабардино-Балкарская Республика
+
+
+```{r}
+ingridients %>%
+filter(region == 'Кабардино-Балкарская Республика') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Кабардино-Балкарская Республика")
+
+```
+
+
+#### Ро:Республика Дагестан
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Дагестан') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Дагестан")
+
+```
+
+
+#### Ро:Республика Адыгея
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Адыгея') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Адыгея")
+
+```
+
+
+#### Ро:Республика Хакасия
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Хакасия') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Хакасия")
+
+```
+
+
+#### Ро:Сахалинская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Сахалинская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Сахалинская область")
+
+```
+
+
+#### Ро:Республика Марий Эл
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Марий Эл') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Марий Эл")
+
+```
+
+
+#### Ро:Камчатский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Камчатский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Камчатский край")
+
+```
+
+
+#### Ро:Костромская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Костромская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Костромская область")
+
+```
+
+
+#### Ро:Орловская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Орловская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Орловская область")
+
+```
+
+
+#### Ро:Амурская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Амурская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Амурская область")
+
+```
+
+
+#### Ро:Республика Саха (Якутия)
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Саха (Якутия)') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Саха (Якутия)")
+
+```
+
+
+#### Ро:Липецкая область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Липецкая область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Липецкая область")
+
+```
+
+
+#### Ро:Республика Мордовия
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Мордовия') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Мордовия")
+
+```
+
+
+#### Ро:Калужская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Калужская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Калужская область")
+
+```
+
+
+#### Ро:Курская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Курская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Курская область")
+
+```
+
+
+#### Ро:Республика Бурятия
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Бурятия') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Бурятия")
+
+```
+
+
+#### Ро:Забайкальский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Забайкальский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Забайкальский край")
+
+```
+
+
+#### Ро:Астраханская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Астраханская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Астраханская область")
+
+```
+
+
+#### Ро:Ямало-Ненецкий автономный округ
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ямало-Ненецкий автономный округ') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ямало-Ненецкий автономный округ")
+
+```
+
+
+#### Ро:Псковская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Псковская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Псковская область")
+
+```
+
+
+#### Ро:Республика Карелия
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Карелия') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Карелия")
+
+```
+
+
+#### Ро:Курганская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Курганская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Курганская область")
+
+```
+
+
+#### Ро:Ульяновская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ульяновская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ульяновская область")
+
+```
+
+
+#### Ро:Чувашская Республика – Чувашия
+
+
+```{r}
+ingridients %>%
+filter(region == 'Чувашская Республика – Чувашия') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Чувашская Республика – Чувашия")
+
+```
+
+
+#### Ро:Ивановская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ивановская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ивановская область")
+
+```
+
+
+#### Ро:Тамбовская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Тамбовская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Тамбовская область")
+
+```
+
+
+#### Ро:Пензенская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Пензенская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Пензенская область")
+
+```
+
+
+#### Ро:Новгородская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Новгородская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Новгородская область")
+
+```
+
+
+#### Ро:Смоленская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Смоленская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Смоленская область")
+
+```
+
+
+#### Ро:Калининградская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Калининградская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Калининградская область")
+
+```
+
+
+#### Ро:Владимирская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Владимирская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Владимирская область")
+
+```
+
+
+#### Ро:Рязанская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Рязанская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Рязанская область")
+
+```
+
+
+#### Ро:Кировская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Кировская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Кировская область")
+
+```
+
+
+#### Ро:Республика Коми
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Коми') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Коми")
+
+```
+
+
+#### Ро:Тюменская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Тюменская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Тюменская область")
+
+```
+
+
+#### Ро:Хабаровский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Хабаровский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Хабаровский край")
+
+```
+
+
+#### Ро:Белгородская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Белгородская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Белгородская область")
+
+```
+
+
+#### Ро:Приморский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Приморский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Приморский край")
+
+```
+
+
+#### Ро:Брянская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Брянская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Брянская область")
+
+```
+
+
+#### Ро:Мурманская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Мурманская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Мурманская область")
+
+```
+
+
+#### Ро:Тульская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Тульская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Тульская область")
+
+```
+
+
+#### Ро:Удмуртская Республика
+
+
+```{r}
+ingridients %>%
+filter(region == 'Удмуртская Республика') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Удмуртская Республика")
+
+```
+
+
+#### Ро:Томская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Томская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Томская область")
+
+```
+
+
+#### Ро:Ленинградская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ленинградская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ленинградская область")
+
+```
+
+
+#### Ро:Иркутская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Иркутская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Иркутская область")
+
+```
+
+
+#### Ро:Алтайский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Алтайский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Алтайский край")
+
+```
+
+
+#### Ро:Тверская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Тверская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Тверская область")
+
+```
+
+
+#### Ро:Ханты-Мансийский автономный округ – Югра
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ханты-Мансийский автономный округ – Югра') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ханты-Мансийский автономный округ – Югра")
+
+```
+
+
+#### Ро:Ярославская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ярославская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ярославская область")
+
+```
+
+
+#### Ро:Омская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Омская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Омская область")
+
+```
+
+
+#### Ро:Кемеровская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Кемеровская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Кемеровская область")
+
+```
+
+
+#### Ро:Вологодская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Вологодская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Вологодская область")
+
+```
+
+
+#### Ро:Ставропольский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ставропольский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ставропольский край")
+
+```
+
+
+#### Ро:Архангельская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Архангельская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Архангельская область")
+
+```
+
+
+#### Ро:Оренбургская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Оренбургская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Оренбургская область")
+
+```
+
+
+#### Ро:Волгоградская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Волгоградская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Волгоградская область")
+
+```
+
+
+#### Ро:Красноярский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Красноярский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Красноярский край")
+
+```
+
+
+#### Ро:Воронежская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Воронежская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Воронежская область")
+
+```
+
+
+#### Ро:Саратовская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Саратовская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Саратовская область")
+
+```
+
+
+#### Ро:Республика Татарстан
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Татарстан') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Татарстан")
+
+```
+
+
+#### Ро:Нижегородская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Нижегородская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Нижегородская область")
+
+```
+
+
+#### Ро:Республика Башкортостан
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Башкортостан') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Башкортостан")
+
+```
+
+
+#### Ро:Пермский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Пермский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Пермский край")
+
+```
+
+
+#### Ро:Новосибирская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Новосибирская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Новосибирская область")
+
+```
+
+
+#### Ро:Краснодарский край
+
+
+```{r}
+ingridients %>%
+filter(region == 'Краснодарский край') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Краснодарский край")
+
+```
+
+
+#### Ро:Самарская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Самарская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Самарская область")
+
+```
+
+
+#### Ро:Ростовская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Ростовская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Ростовская область")
+
+```
+
+
+#### Ро:Челябинская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Челябинская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Челябинская область")
+
+```
+
+
+#### Ро:Свердловская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Свердловская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Свердловская область")
+
+```
+
+
+#### Ро:Московская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Московская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Московская область")
+
+```
+
+
+#### Ро:Санкт-Петербург
+
+
+```{r}
+ingridients %>%
+filter(region == 'Санкт-Петербург') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Санкт-Петербург")
+
+```
+
+
+#### Ро:Москва
+
+
+```{r}
+ingridients %>%
+filter(region == 'Москва') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Москва")
+
+```
+
+
+#### Ук:Черниговская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Черниговская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Черниговская область")
+
+```
+
+
+#### Ук:Запорожская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Запорожская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Запорожская область")
+
+```
+
+
+#### Ук:Одесская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Одесская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Одесская область")
+
+```
+
+
+#### Ук:Севастополь
+
+
+```{r}
+ingridients %>%
+filter(region == 'Севастополь') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Севастополь")
+
+```
+
+
+#### Ук:Луганская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Луганская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Луганская область")
+
+```
+
+
+#### Ук:Харьковская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Харьковская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Харьковская область")
+
+```
+
+
+#### Ук:Днепропетровская область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Днепропетровская область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Днепропетровская область")
+
+```
+
+
+#### Ук:Киев
+
+
+```{r}
+ingridients %>%
+filter(region == 'Киев') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Киев")
+
+```
+
+
+#### Ук:Республика Крым
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Крым') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Крым")
+
+```
+
+
+#### Ук:Донецкая область
+
+
+```{r}
+ingridients %>%
+filter(region == 'Донецкая область') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Донецкая область")
+
+```
+
+
