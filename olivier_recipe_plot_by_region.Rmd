@@ -454,6 +454,30 @@ olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Камчат
 ```
 
 
+#### Ро:Севастополь
+
+
+```{r}
+ingridients %>%
+filter(region == 'Севастополь') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Севастополь")
+
+```
+
+
 #### Ро:Костромская область
 
 
@@ -1242,6 +1266,30 @@ colnames(ingredients_transformed) <- c("морковка", "свежие огу�
 
 
 olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Мурманская область")
+
+```
+
+
+#### Ро:Республика Крым
+
+
+```{r}
+ingridients %>%
+filter(region == 'Республика Крым') %>%
+select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate_all(as.integer) %>% 
+group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
+mutate(n = n()) %>% 
+filter(n >= 1) %>% 
+select(-n) %>% 
+as.data.frame()-> 
+ingredients_transformed
+
+
+colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
+
+
+olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Крым")
 
 ```
 
@@ -2086,30 +2134,6 @@ olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Одесск
 ```
 
 
-#### Ук:Севастополь
-
-
-```{r}
-ingridients %>%
-filter(region == 'Севастополь') %>%
-select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
-mutate_all(as.integer) %>% 
-group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
-mutate(n = n()) %>% 
-filter(n >= 1) %>% 
-select(-n) %>% 
-as.data.frame()-> 
-ingredients_transformed
-
-
-colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
-
-
-olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Севастополь")
-
-```
-
-
 #### Ук:Луганская область
 
 
@@ -2202,30 +2226,6 @@ colnames(ingredients_transformed) <- c("морковка", "свежие огу�
 
 
 olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Киев")
-
-```
-
-
-#### Ук:Республика Крым
-
-
-```{r}
-ingridients %>%
-filter(region == 'Республика Крым') %>%
-select(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
-mutate_all(as.integer) %>% 
-group_by(carrot, fresh_cucumber, pickle, egg, greens, ham, beef, sausage,  chicken, other_flesh, no_meat, onion, fresh_pea, pickled_pea, potato, mayonnaise) %>% 
-mutate(n = n()) %>% 
-filter(n >= 1) %>% 
-select(-n) %>% 
-as.data.frame()-> 
-ingredients_transformed
-
-
-colnames(ingredients_transformed) <- c("морковка", "свежие огурцы", "мар./сол. огурцы", "яйца", "зелень", "ветчина", "говядина", "колбаса", "курица","др. мясо/рыба","без мяса", "лук", "свежий горошек", "конс. горошек", "картошка", "майонез")
-
-
-olivier_recipe_plot(ingredients_transformed, freq_max = 0, title = "Республика Крым")
 
 ```
 

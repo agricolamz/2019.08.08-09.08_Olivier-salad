@@ -100,7 +100,7 @@ df
 ```{r}
 df %>% 
   mutate(region = str_replace(region, "Автономная Республика Крым", "Республика Крым"),
-         country = if_else(region == "Республика Крым", "Украина", country)) ->
+         country = if_else(region == "Республика Крым", "Россия", country)) ->
   df
 ```
 
@@ -109,7 +109,7 @@ df %>%
 ```{r}
 df %>% 
   mutate(region = str_replace(region, "Город Севастополь", "Севастополь"),
-         country = if_else(region == "Севастополь", "Украина", country)) ->
+         country = if_else(region == "Севастополь", "Россия", country)) ->
   df
 ```
 
@@ -152,7 +152,7 @@ df %>%
 
 Вот так наши наблюдения распределены по регионам:
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.width=9}
 final_df <- read_csv("data/final_df.csv.gz")
 
 df %>% 
@@ -175,23 +175,23 @@ for_plot %>%
                   80, # Шыкмент
                   20, # Москва
                   20, # Санкт-Петербург
-                  16, # Киев
-                  22), # Севастополь
+                  22, # Киев
+                  16), # Севастополь
          lat = c(58, # Минск
                  43, #  Алма-Ата
                  47, # Нур-Султан
                  40, # Шыкмент
                  62, # Москва
                  72, # Санкт-Петербург
-                 52, # Киев
-                 43) # Севастополь
+                 43, # Киев
+                 52) # Севастополь
 )) ->
   subplot
 
 data.frame(region = rep(c("Минск", "Алма-Ата", "Нур-Султан", "Шыкмент", "Москва", "Санкт-Петербург", "Киев", "Севастополь"), 2),
        country = rep(subplot$country, 2),
-       lat = c(53.91667,43.25000, 51.13333, 42.30000, 55.75583, 59.95000, 50.45000, 44.60000,subplot$lat),
-       long = c(27.55000,76.90000, 71.43333, 69.60000, 37.61778, 30.31667, 30.51667, 33.53333, subplot$long),
+       lat = c(53.91667,43.25000, 51.13333, 42.30000, 55.75583, 59.95000,  44.60000, 50.45000, subplot$lat),
+       long = c(27.55000,76.90000, 71.43333, 69.60000, 37.61778, 30.31667, 33.53333, 30.51667,  subplot$long),
        group = rep(1:8, 2),
        n = 1) ->
   lines
@@ -199,7 +199,7 @@ data.frame(region = rep(c("Минск", "Алма-Ата", "Нур-Султан"
 for_plot %>% 
   ggplot(aes(long, lat, group = group, fill = n)) +
   geom_polygon(aes(color = country), size = 0.4, show.legend = FALSE) +
-  coord_map(projection = 'gilbert', orientation = c(90, 0, 50))+
+  coord_map(projection = 'gilbert', orientation = c(90, 0, 50), xlim = c(10, 180))+
   theme_bw()+
   scale_color_manual(values = c("darkorchid3", "darkolivegreen4", "grey50", "royalblue"))+
   scale_fill_gradient(low = "white", high = "darkgoldenrod1")+
@@ -211,8 +211,9 @@ for_plot %>%
   theme(legend.position = c(1, 1), 
         legend.justification = c(1.1, 1.1), 
         legend.title = element_blank(),
+        legend.background = element_rect(fill = "grey95"),
         plot.caption = element_text(color = rgb(1,250/255,250/255), size = 12),
-        panel.background = element_rect(fill = "lightcyan1"),
+        panel.background = element_rect(fill = "grey95"),
         panel.grid.major = element_line(size = 0.1, linetype = 'solid',
                                 colour = "black"))+
   # fake layer for creating a legend
@@ -594,7 +595,7 @@ df %>%
 
 Может быть что-то увидиться на карте регионов?
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, fig.width=9}
 olivier_plot <- function(question, answers, baseline = "", thrashold = 0, title, user_df = df, map_df = final_df){
 user_df %>% 
   filter(question == {{ question }},
@@ -624,32 +625,33 @@ for_plot %>%
                   80, # Шыкмент
                   20, # Москва
                   20, # Санкт-Петербург
-                  16, # Киев
-                  22), # Севастополь
+                  22, # Киев
+                  16), # Севастополь
          lat = c(58, # Минск
                  43, #  Алма-Ата
                  47, # Нур-Султан
                  40, # Шыкмент
                  62, # Москва
                  72, # Санкт-Петербург
-                 52, # Киев
-                 43) # Севастополь
+                 43, # Киев
+                 52) # Севастополь
 )) ->
   subplot
 
 data.frame(region = rep(c("Минск", "Алма-Ата", "Нур-Султан", "Шыкмент", "Москва", "Санкт-Петербург", "Киев", "Севастополь"), 2),
        country = rep(subplot$country, 2),
-       lat = c(53.91667,43.25000, 51.13333, 42.30000, 55.75583, 59.95000, 50.45000, 44.60000,subplot$lat),
-       long = c(27.55000,76.90000, 71.43333, 69.60000, 37.61778, 30.31667, 30.51667, 33.53333, subplot$long),
+       lat = c(53.91667,43.25000, 51.13333, 42.30000, 55.75583, 59.95000,  44.60000, 50.45000, subplot$lat),
+       long = c(27.55000,76.90000, 71.43333, 69.60000, 37.61778, 30.31667, 33.53333, 30.51667,  subplot$long),
+       ratio = 0,
        group = rep(1:8, 2),
-       ratio = 1) ->
+       n = 1) ->
   lines
 
 for_plot %>% 
   filter(total >= thrashold) %>% 
   ggplot(aes(long, lat, group = group, fill = ratio)) +
   geom_polygon(aes(color = country), size = 0.4, show.legend = FALSE) +
-  coord_map(projection = 'gilbert', orientation = c(90, 0, 50))+
+  coord_map(projection = 'gilbert', orientation = c(90, 0, 50), xlim = c(10, 180))+
   theme_bw()+
   scale_color_manual(values = c("darkorchid3", "darkolivegreen4", "grey50", "royalblue"))+
   scale_fill_gradient(low = "white", high = "darkgoldenrod1")+
@@ -662,7 +664,8 @@ for_plot %>%
         legend.justification = c(1.1, 1.1), 
         legend.title = element_blank(),
         plot.caption = element_text(color = rgb(1,250/255,250/255), size = 12),
-        panel.background = element_rect(fill = "lightcyan1"),
+        panel.background = element_rect(fill = "grey95"),
+        legend.background = element_rect(fill = "grey95"),
         panel.grid.major = element_line(size = 0.1, linetype = 'solid',
                                 colour = "black"))+
   # fake layer for creating a legend
@@ -756,7 +759,7 @@ df %>%
 
 Видимо, можно отбросить ответы "нет, не нужно", и "все равно какие". Попробуем свести дихотомию до двух членов: свежие vs не свежие.
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, fig.width=9}
 df %>% 
   mutate(answer = str_replace(answer, "маринованные корнишоны|маринованные огурцы|соленые огурцы", "маринованные/соленные огурцы")) ->
   df
@@ -783,7 +786,7 @@ df %>%
 ```
 На графике мы видим, что большинство людей считает, что лук не нужен, но есть значительная доля людей, которая в Оливье лук кладет:
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, fig.width=9}
 df %>% 
   mutate(answer = ifelse(question == "onion" & answer != "нет, не нужно", "лук", answer)) ->
   df
@@ -811,7 +814,7 @@ df %>%
 
 Свежий горошек или консервированный/маринованный?
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, fig.width=9}
 olivier_plot(question = "peas", 
              answers = "маринованный горошек|свежий зеленый горошек",
              baseline = "маринованный горошек",
@@ -850,7 +853,7 @@ df %>%
 
 Здесь видны два паттерна: люди с зеленью и остальные. Объединим в одну группу ответы, содержащие петрушку и зелень, и противопоставим им ответы без зелени:
 
-```{r,  cache=TRUE}
+```{r,  cache=TRUE, fig.width=9}
 df %>% 
   filter(!str_detect(answer, "чеснок|стручковый лук")) %>% 
   mutate(answer = ifelse(str_detect(answer, "петрушка|укроп"), "зелень",answer)) -> 
